@@ -1,7 +1,7 @@
 name: defer_pointer
 description: Allows a child to hit test outside its parents bounds.
-version: 0.0.1
-homepage:
+version: 0.0.1+1
+homepage: https://github.com/gskinnerTeam/flutter-defer-pointer/
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
