@@ -5,6 +5,8 @@ class DeferredPointerHandlerLink extends ChangeNotifier with EquatableMixin {
   DeferredPointerHandlerLink();
   final List<_DeferPointerRenderObject> _painters = [];
 
+  void descendantNeedsPaint() => notifyListeners();
+
   /// All painters currently attached to this link
   List<_DeferPointerRenderObject> get painters => UnmodifiableListView(_painters);
 

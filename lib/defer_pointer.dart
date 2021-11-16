@@ -96,4 +96,13 @@ class _DeferPointerRenderObject extends RenderProxyBox {
     if (deferPaint) return; // skip the draw if an ancestor is supposed to handle it
     context.paintChild(child!, offset);
   }
+
+  @override
+  void markNeedsPaint() {
+    if (deferPaint) {
+      _link.descendantNeedsPaint();
+    } else {
+      super.markNeedsPaint();
+    }
+  }
 }

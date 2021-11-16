@@ -1,15 +1,16 @@
-An alternative to overlay which allows you to easily hit test a widget outside it's parent bounds.
+An alternative to Overlay which allows you to easily render and hit test a widget outside its parent bounds.
 
-Works by deferring hit-testing and rendering (optionally) to an ancestor widget that is further up the tree.
+Typically in Flutter, if you offset a widget outside of it's parent bounds hit-testing will break.
 
+DeferPointer works around this issue by deferring hit-testing and (optionally) rendering to an ancestor widget further up the tree. This is useful for larger UI components like dropdown menus and sliding panels, as well as just small styling tweaks.
+
+Note: This package is based on the original idea by @shrouxm here: https://github.com/flutter/flutter/issues/75747#issuecomment-907755810
 
 ## 🔨 Installation
 ```yaml
 dependencies:
-  defer_pointer: ^0.0.1
+  defer_pointer: ^0.0.1+4
 ```
-
-
 
 ### ⚙ Import
 
@@ -24,43 +25,33 @@ import 'package:defer_pointer/defer_pointer.dart';
 ```dart
 Widget build(BuildContext context) {
     return DeferredPointerHandler(
-      child: Center(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            // Offset this button outside it's parent stack
-            Positioned(
-              bottom: -30,
-              child: DeferPointer(
-                child: TextButton(
-                  onPressed: () => debugPrint('tap!'),
-                  child: const Text('Click Me!'),
-                ),
-              ),
-            ),
-            Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(color: Colors.green, boxShadow: [
-                  BoxShadow(color: Colors.black.withOpacity(1), blurRadius: 4, spreadRadius: 4),
-                ])),
-          ],
-        ),
-      ),
-    );
+       child: SizedBox(
+           width: 100,
+           height: 100,
+           child: Stack(clipBehavior: Clip.none, children: [
+             // Hang button off the bottom of the content
+             Positioned(
+               bottom: -30,
+               child: DeferPointer(child: _SomeBtn(false)),
+             ),
+             // Content
+             Positioned.fill(
+               child: Container(
+                 decoration: BoxDecoration(color: Colors.green, boxShadow: [
+                   BoxShadow(color: Colors.black.withOpacity(1), blurRadius: 4, spreadRadius: 4),
+                 ]),
+               ),
+             ),
+           ]))));
   }
 ```
 
-In addition to deferring the hit-test, you can defer the painting as well. This causes the child of `DeferHit` to render inside the `DeferredPointerHandler` instead of its current parent, which will place it on top of any sibling widgets.
+Enable `paintOnTop` if you need the child Widget painted on top of it's siblings. This will defer painting to the currently linked `DeferredPointerHandler`.
 ```dart
 return DeferPointer(
     paintOnTop: true,
-    child: TextButton(
-        onPressed: () => debugPrint('tap!'),
-        child: const Text('Click Me!'),
-    ));
+    child: TextButton(...));
 ```
-
 
 ### Examples
 There are 4 examples in this repo:
