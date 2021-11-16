@@ -1,15 +1,20 @@
 An alternative to Overlay which allows you to easily render and hit test a widget outside its parent bounds.
+_Based on the original idea by @shrouxm here: https://github.com/flutter/flutter/issues/75747#issuecomment-907755810_
 
-Typically in Flutter, if you offset a widget outside of it's parent bounds hit-testing will break.
+Typically in Flutter, if you offset a widget outside of it's parent bounds hit-testing will break. `DeferPointer` works around this issue by handing off hit-testing and (optionally) rendering to an `DeferredPointerHandler` widget further up the tree.
 
-DeferPointer works around this issue by deferring hit-testing and (optionally) rendering to an ancestor widget further up the tree. This is useful for larger UI components like dropdown menus and sliding panels, as well as just small styling tweaks.
+While `Overlay` can solve this issue to some degree, using `DeferPointer` offers some benefits:
+* just works: no error prone and tedious layer management
+* more granular: you can set the bounds to be any ancestor widget you choose
+* more flexible: you can choose to paint the child on top, or not
+* easier to align/pin to a widget in the tree as that is the default expectation
 
-Note: This package is based on the original idea by @shrouxm here: https://github.com/flutter/flutter/issues/75747#issuecomment-907755810
+This is useful for larger UI components like dropdown menus and sliding panels, as well as just small general styling tweaks.
 
 ## 🔨 Installation
 ```yaml
 dependencies:
-  defer_pointer: ^0.0.1+4
+  defer_pointer: ^0.0.2
 ```
 
 ### ⚙ Import

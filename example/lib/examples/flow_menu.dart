@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 /// This is based on the demo here: https://api.flutter.dev/flutter/widgets/Flow-class.html
 /// Adds a [DeferredPointerHandler] to the root of the view, and wraps each flowMenuItem in a [DeferPointer].
 /// Also requires that the Flow() widget itself be wrapped in a [DeferPointer] with paintOnTop=true
+/// todo(sb): figure out why we need to use 2 [DeferPointer] widgets here
 class FlowMenuExample extends StatelessWidget {
   const FlowMenuExample({Key? key}) : super(key: key);
 

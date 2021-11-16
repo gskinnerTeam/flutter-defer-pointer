@@ -1,6 +1,6 @@
 name: defer_pointer
 description: An alternative to Overlay which allows you to easily render and hit test a widget outside its parent bounds.
-version: 0.0.1+5
+version: 0.0.2
 homepage: https://github.com/gskinnerTeam/flutter-defer-pointer/
 
 environment:

@@ -3,7 +3,7 @@ import 'package:example/examples/flow_menu.dart';
 import 'package:flutter/material.dart';
 
 import 'examples/dropdown_menus.dart';
-import 'examples/simple_offset_outside_parent.dart';
+import 'examples/simple_offset.dart';
 
 void main() {
   runApp(const MyApp());
